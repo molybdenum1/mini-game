@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { COLORS } from "../util/constant";
+import { COLORS } from "../../util/constant";
 
 export const Title = ({ children, type = "primary" }) => {
   const style = type === "primary" ? styles.primaryTitle : styles.inverseTitle;

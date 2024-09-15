@@ -21,7 +21,7 @@ export default function App() {
   let screen = <StartGameScreen onPickNumber={pickNumber} />;
 
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen choosenNumber={userNumber} />;
   }
 
   return (

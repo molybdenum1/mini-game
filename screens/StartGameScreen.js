@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Alert } from "react-native";
-import PrimaryButton from "../components/PrimaryButton.js";
-import { Title } from "../components/Title";
+import PrimaryButton from "../components/ui/PrimaryButton.js";
+import { Title } from "../components/ui/Title";
 import { COLORS } from "../util/constant.js";
 
 
