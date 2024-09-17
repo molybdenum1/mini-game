@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, TextInput, StyleSheet, Alert } from "react-native";
+import { View, TextInput, Text, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton.js";
 import { Title } from "../components/ui/Title";
 import { COLORS } from "../util/constant.js";
-
+import { Card } from "../components/ui/Card.js";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [numValue, setNumValue] = useState("");
@@ -19,8 +19,7 @@ export default function StartGameScreen({ onPickNumber }) {
   const confirmInputHandler = () => {
     if (!isNaN(numValue) || numValue > 0 || numValue < 100) {
       console.log(numValue);
-      onPickNumber(numValue)
-      
+      onPickNumber(numValue);
     } else {
       console.log("1");
 
@@ -33,6 +32,7 @@ export default function StartGameScreen({ onPickNumber }) {
   return (
     <View style={styles.inputContainer}>
       <Title type="inverse">Guess Number</Title>
+      <Text style={styles.instractionText}>Enter a Number</Text>
       <TextInput
         style={styles.textInput}
         keyboardType="numeric"
@@ -41,14 +41,14 @@ export default function StartGameScreen({ onPickNumber }) {
         value={numValue}
         onChangeText={numberInputHandler}
       />
-      <View style={styles.buttonsContainer}>
+      <Card>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
-      </View>
+      </Card>
     </View>
   );
 }
@@ -60,9 +60,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     borderRadius: 8,
     elevation: 5,
-    backgroundColor:  COLORS.background,
+    backgroundColor: COLORS.background,
     justifyContent: "center",
     alignItems: "center",
+  },
+  instractionText: {
+    color: COLORS.buttonBack,
+    fontSize: 24,
   },
   textInput: {
     height: 50,
@@ -74,11 +78,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     marginVertical: 8,
     fontWeight: "bold",
-  },
-  buttonsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
   },
   buttonContainer: {
     flex: 1,
