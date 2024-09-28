@@ -4,6 +4,7 @@ import PrimaryButton from "../components/ui/PrimaryButton.js";
 import { Title } from "../components/ui/Title";
 import { COLORS } from "../util/constant.js";
 import { Card } from "../components/ui/Card.js";
+import { Paragraph } from "../components/ui/Paragraph.js";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [numValue, setNumValue] = useState("");
@@ -32,7 +33,7 @@ export default function StartGameScreen({ onPickNumber }) {
   return (
     <View style={styles.inputContainer}>
       <Title type="inverse">Guess Number</Title>
-      <Text style={styles.instractionText}>Enter a Number</Text>
+      <Paragraph>Enter a Number</Paragraph>
       <TextInput
         style={styles.textInput}
         keyboardType="numeric"

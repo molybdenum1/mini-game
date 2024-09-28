@@ -7,6 +7,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 import StartGameScreen from "./screens/StartGameScreen.js";
 import GameScreen from "./screens/GameScreen.js";
@@ -15,6 +17,11 @@ import GameOverScreen from "./screens/GameOverScreen.js";
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  const [fonstLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
 
   const pickNumber = (pickedNumber) => {
     setUserNumber(pickedNumber);
@@ -27,16 +34,19 @@ export default function App() {
 
   let screen = <StartGameScreen onPickNumber={pickNumber} />;
 
+  if (!fonstLoaded) {
+    return <AppLoading />;
+  }
+
   if (userNumber) {
     screen = (
       <GameScreen choosenNumber={userNumber} onGameOver={gameOverHandler} />
     );
   }
-  
 
   if (gameIsOver && userNumber) {
     console.log(1);
-    
+
     screen = <GameOverScreen />;
   }
 

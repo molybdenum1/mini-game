@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Alert } from "react-native";
 import { Title } from "../components/ui/Title";
 import { NumberContainer } from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import { COLORS } from "../util/constant";
 
 const generateRandomNumber = (min, max, exclude) => {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -44,7 +45,7 @@ export default function GameScreen({ choosenNumber, onGameOver }) {
   useEffect(() => {
     if (currentGuess === +choosenNumber) {
       console.log(true);
-      
+
       onGameOver();
     }
   }, [currentGuess, choosenNumber, onGameOver]);
@@ -54,10 +55,18 @@ export default function GameScreen({ choosenNumber, onGameOver }) {
       <Title>Guess number</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <View>
-        <Text>Higher or lower?</Text>
-        <View>
-          <PrimaryButton onPress={() => nextGuessHandler("-")}>-</PrimaryButton>
-          <PrimaryButton onPress={() => nextGuessHandler("+")}>+</PrimaryButton>
+        <Text style={styles.subtitle}>Higher or lower?</Text>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={() => nextGuessHandler("-")}>
+              --
+            </PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}> 
+            <PrimaryButton onPress={() => nextGuessHandler("+")}>
+              +
+            </PrimaryButton>
+          </View>
         </View>
       </View>
       <View>
@@ -73,5 +82,15 @@ const styles = StyleSheet.create({
     padding: 12,
     marginTop: 100,
     marginLeft: 10,
+  },
+  subtitle: {
+    fontSize: 20,
+    color: COLORS.inverse,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });
