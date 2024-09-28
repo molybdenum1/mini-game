@@ -4,7 +4,7 @@ import { Title } from "../components/ui/Title";
 import { COLORS } from "../util/constant";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
-export default function GameOverScreen() {
+export default function GameOverScreen({ roundsNumber, userNumber, onRestartGame }) {
   return (
     <View style={styles.screen}>
       <Title>Game Over</Title>
@@ -15,11 +15,10 @@ export default function GameOverScreen() {
         />
       </View>
       <Text style={styles.summaryText}>
-        Your phone needed <Text style={styles.highlightedText}>X</Text> to get <Text style={styles.highlightedText}>Y</Text>.
+        Your phone needed <Text style={styles.highlightedText}>{roundsNumber}</Text> to get{" "}
+        <Text style={styles.highlightedText}>{userNumber}</Text>.
       </Text>
-      <PrimaryButton>
-        Restart
-      </PrimaryButton>
+      <PrimaryButton onPress={onRestartGame}>Restart</PrimaryButton>
     </View>
   );
 }
@@ -45,12 +44,12 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   summaryText: {
-    fontFamily: 'open-sans',
+    fontFamily: "open-sans",
     fontSize: 20,
-    marginVertical: 10
+    marginVertical: 10,
   },
   highlightedText: {
-    fontFamily: 'open-sans-bold',
-    color: COLORS.inverse
-  }
+    fontFamily: "open-sans-bold",
+    color: COLORS.inverse,
+  },
 });
