@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  Alert,
+  Dimensions,
+  KeyboardAvoidingView,
+} from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton.js";
 import { Title } from "../components/ui/Title";
 import { COLORS } from "../util/constant.js";
@@ -31,33 +39,40 @@ export default function StartGameScreen({ onPickNumber }) {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <Title type="inverse">Guess Number</Title>
-      <Paragraph>Enter a Number</Paragraph>
-      <TextInput
-        style={styles.textInput}
-        keyboardType="numeric"
-        maxLength={2}
-        autoCorrect={false}
-        value={numValue}
-        onChangeText={numberInputHandler}
-      />
-      <Card>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-        </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-        </View>
-      </Card>
-    </View>
+    <KeyboardAvoidingView style={styles.screen} behavior="position">
+      <View style={styles.inputContainer}>
+        <Title type="inverse">Guess Number</Title>
+        <Paragraph>Enter a Number</Paragraph>
+        <TextInput
+          style={styles.textInput}
+          keyboardType="numeric"
+          maxLength={2}
+          autoCorrect={false}
+          value={numValue}
+          onChangeText={numberInputHandler}
+        />
+        <Card>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+          </View>
+        </Card>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   inputContainer: {
     padding: 16,
-    marginTop: 100,
+    marginTop: deviceHeight < 450 ? 30 : 100,
     marginHorizontal: 24,
     borderRadius: 8,
     elevation: 5,

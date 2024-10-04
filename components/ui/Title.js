@@ -1,10 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, useWindowDimensions } from "react-native";
 import { COLORS } from "../../util/constant";
 
 export const Title = ({ children, type = "primary" }) => {
   const style = type === "primary" ? styles.primaryTitle : styles.inverseTitle;
-  return <Text style={style}>{children}</Text>;
+  const { width } = useWindowDimensions();
+  const paddingTop = width > 500 ?  0 : 10
+  return <Text style={[style, {paddingTop: paddingTop}]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({
